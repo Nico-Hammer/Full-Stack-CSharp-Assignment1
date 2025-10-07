@@ -21,7 +21,7 @@ namespace Assignment1.Models
                         LastName = "A",
                         Phonenumber = "521-1243",
                         Email = "alice@mail.com",
-                        Category = "Friend",
+                        CategoryID = 0,
                         Organization = "test"
                     },
                     new Contact
@@ -31,7 +31,7 @@ namespace Assignment1.Models
                         LastName = "B",
                         Phonenumber = "356-1234",
                         Email = "bob@mail.com",
-                        Category = "Friend",
+                        CategoryID = 0,
                         Organization = "test"
                     }
                 );

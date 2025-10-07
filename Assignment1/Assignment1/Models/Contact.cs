@@ -22,7 +22,8 @@ namespace Assignment1.Models
         public string Email { get; set; }
         
         [Required(ErrorMessage = "Category is required")]
-        public string Category { get; set; }
+        [Range(1, 3, ErrorMessage = "Please select a category")]
+        public int? CategoryID { get; set; }
         
         public string? Organization { get; set; }
 
