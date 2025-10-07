@@ -16,4 +16,11 @@
       <PackageReference Include="SqlLocalDb" Version="1.1.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Contacts\Add.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Contacts\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Contacts\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Contacts\Edit.cshtml" />
+    </ItemGroup>
+
 </Project>
