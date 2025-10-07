@@ -19,7 +19,7 @@ namespace Assignment1.Models
                         ContactID = 1,
                         FirstName = "Alice",
                         LastName = "A",
-                        Phonenumber = 521-1243,
+                        Phonenumber = "521-1243",
                         Email = "alice@mail.com",
                         Category = "Friend",
                         Organization = "test"
@@ -29,7 +29,7 @@ namespace Assignment1.Models
                         ContactID = 2,
                         FirstName = "Bob",
                         LastName = "B",
-                        Phonenumber = 356-1234,
+                        Phonenumber = "356-1234",
                         Email = "bob@mail.com",
                         Category = "Friend",
                         Organization = "test"

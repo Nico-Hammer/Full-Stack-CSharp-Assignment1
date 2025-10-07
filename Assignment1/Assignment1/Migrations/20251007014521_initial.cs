@@ -20,10 +20,10 @@ namespace Assignment1.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phonenumber = table.Column<int>(type: "int", nullable: false),
+                    Phonenumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Organization = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Organization = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -35,8 +35,8 @@ namespace Assignment1.Migrations
                 columns: new[] { "ContactID", "Category", "Email", "FirstName", "LastName", "Organization", "Phonenumber" },
                 values: new object[,]
                 {
-                    { 1, "Friend", "alice@mail.com", "Alice", "A", "test", -722 },
-                    { 2, "Friend", "bob@mail.com", "Bob", "B", "test", -878 }
+                    { 1, "Friend", "alice@mail.com", "Alice", "A", "test", "521-1243" },
+                    { 2, "Friend", "bob@mail.com", "Bob", "B", "test", "356-1234" }
                 });
         }
 

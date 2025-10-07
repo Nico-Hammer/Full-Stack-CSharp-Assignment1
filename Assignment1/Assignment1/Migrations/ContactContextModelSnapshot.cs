@@ -46,11 +46,11 @@ namespace Assignment1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Organization")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Phonenumber")
-                        .HasColumnType("int");
+                    b.Property<string>("Phonenumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ContactID");
 
@@ -65,7 +65,7 @@ namespace Assignment1.Migrations
                             FirstName = "Alice",
                             LastName = "A",
                             Organization = "test",
-                            Phonenumber = -722
+                            Phonenumber = "521-1243"
                         },
                         new
                         {
@@ -75,7 +75,7 @@ namespace Assignment1.Migrations
                             FirstName = "Bob",
                             LastName = "B",
                             Organization = "test",
-                            Phonenumber = -878
+                            Phonenumber = "356-1234"
                         });
                 });
 #pragma warning restore 612, 618

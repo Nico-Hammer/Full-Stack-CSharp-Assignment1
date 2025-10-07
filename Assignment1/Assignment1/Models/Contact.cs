@@ -15,16 +15,16 @@ namespace Assignment1.Models
         
         [Required(ErrorMessage = "Phone number is required")]
         [Phone(ErrorMessage="Please provide a valid phone number")]
-        public int? Phonenumber { get; set; }
+        public string Phonenumber { get; set; }
         
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Please provide a valid email address")]
-        public string? Email { get; set; }
+        public string Email { get; set; }
         
         [Required(ErrorMessage = "Category is required")]
         public string Category { get; set; }
         
-        public string Organization { get; set; }
+        public string? Organization { get; set; }
 
         public string Slug => FirstName?.Replace(' ', '-').ToLower() + '-' + LastName?.ToLower();
     }
