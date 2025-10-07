@@ -21,8 +21,8 @@
     @foreach (var contact in Model)
     {
         <tr>
-            <td>@contact.FirstName</td>
-            <td>@contact.LastName</td>
+            <td><a asp-controller="Contact" asp-action="Details" asp-route-id="@contact.ContactID">@contact.FirstName</a></td>
+            <td><a asp-controller="Contact" asp-action="Details" asp-route-id="@contact.ContactID">@contact.LastName</a></td>
             <td>@contact.Phonenumber</td>
             <td>@contact.Email</td>
             <td>@contact.Category</td>

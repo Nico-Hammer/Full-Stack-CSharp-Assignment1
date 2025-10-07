@@ -12,9 +12,9 @@ namespace Contacts.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(int? id)
+        public IActionResult Details(Contact contact)
         {
-            return View(context);
+            return View(contact);
         }
 
         [HttpGet]
