@@ -7,4 +7,42 @@
     <h1 class="display-4 bg-dark text-white">Contact Manager</h1>
 </div>
 
-<table></table>
+<!-- Contact Details Section -->
+<div class="mt-5">
+    <h2>Contact Details</h2>
+    <table class="table table-bordered mt-3">
+
+        
+        <tr>
+            <th style="width: 200px;">Name:</th> 
+            <td>@Model.FirstName @Model.LastName</td>
+        </tr>
+        <tr>
+            <th>Phone:</th>
+            <td>@Model.Phonenumber/td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <th>Category:</th>
+            <td>@Model.CategoryID</td>
+        </tr>
+        <tr>
+            <th>Organization:</th>
+            <td>@Model.Organization</td>
+        </tr>
+        <tr>
+            <th>Date Added:</th>
+            <td>@Model.CreatedDateTime</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="button-container">
+                <a asp-action="Edit" asp-route-id="@Model.ContactID" class="btn btn-dark me-2">Edit</a>
+                <a asp-action="Delete" asp-route-id="@Model.ContactID" class="btn btn-dark me-2">Delete</a>
+                <a asp-action="Index" class="btn btn-dark">Home</a>
+            </td>
+        </tr>
+    </table>
+</div>
