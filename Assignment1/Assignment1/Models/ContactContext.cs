@@ -7,7 +7,9 @@ namespace Assignment1.Models
     {
             public ContactContext(DbContextOptions<ContactContext> options) : base(options) { }
 
+            
             public DbSet<Contact> Contacts { get; set; }
+            public DbSet<Category> Categories { get; set; }
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
@@ -21,8 +23,9 @@ namespace Assignment1.Models
                         LastName = "A",
                         Phonenumber = "521-1243",
                         Email = "alice@mail.com",
-                        CategoryID = 0,
-                        Organization = "test"
+                        CategoryID = 2,
+                        Organization = "test",
+                        CreatedDateTime = "01/01/0001 'at' 00:00:00",
                     },
                     new Contact
                     {
@@ -31,10 +34,27 @@ namespace Assignment1.Models
                         LastName = "B",
                         Phonenumber = "356-1234",
                         Email = "bob@mail.com",
-                        CategoryID = 0,
-                        Organization = "test"
+                        CategoryID = 1,
+                        Organization = "test",
+                        CreatedDateTime = "01/01/0001 'at' 00:00:00",
                     }
                 );
+                modelBuilder.Entity<Category>().HasData(
+                    new Category
+                    {
+                        CategoryID = 1,
+                        CategoryName = "Family",
+                    },
+                    new Category
+                    {
+                        CategoryID = 2,
+                        CategoryName = "Friend",
+                    },
+                    new Category
+                    {
+                        CategoryID = 3,
+                        CategoryName = "Work",
+                    });
             }
     }
 }

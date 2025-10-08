@@ -1,5 +1,7 @@
 ﻿using Microsoft.Identity.Client;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
 namespace Assignment1.Models
 {
     public class Contact
@@ -25,7 +27,12 @@ namespace Assignment1.Models
         [Range(1, 3, ErrorMessage = "Please select a category")]
         public int? CategoryID { get; set; }
         
+        [ValidateNever]
+        public Category CategoryName { get; set; }
+
         public string? Organization { get; set; }
+        
+        public string CreatedDateTime { get; set; } = DateTime.Now.ToString("MM/dd/yyyy 'at'  hh:mm:ss");
 
         public string Slug => FirstName?.Replace(' ', '-').ToLower() + '-' + LastName?.ToLower();
     }

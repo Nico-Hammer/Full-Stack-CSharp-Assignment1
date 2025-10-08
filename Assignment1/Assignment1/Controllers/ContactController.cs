@@ -12,8 +12,11 @@ namespace Contacts.Controllers
         }
 
         [HttpGet]
-        public IActionResult Details(Contact contact)
+        public IActionResult Details(int id)
         {
+            ViewBag.Action = "Details";
+            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
+            var contact = context.Contacts.Find(id);
             return View(contact);
         }
 
@@ -21,6 +24,7 @@ namespace Contacts.Controllers
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
+            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
             return View("Edit", new Contact());
         }
 
@@ -28,7 +32,9 @@ namespace Contacts.Controllers
         public IActionResult Edit(int? id)
         {
             ViewBag.Action = "Edit";
-            return View("Edit", new Contact());
+            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
+            var contact = context.Contacts.Find(id);
+            return View(contact);
         }
         
         [HttpPost]
@@ -50,6 +56,7 @@ namespace Contacts.Controllers
             else
             {
                 ViewBag.Action = (contact.ContactID == 0) ? "Add" : "Edit";
+                ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
                 return View(contact);
             }
         }
