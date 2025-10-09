@@ -1,12 +1,15 @@
-﻿@model List<Contact>
+﻿<!-- import the list of Contacts from the home controller -->
+@model List<Contact>
+<!-- set the title in the ViewBag to home page for proper tab naming -->
 @{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="text-center">
     <h1 class="display-4 bg-dark text-white">Contact Manager</h1>
 </div>
+<!-- call the Add route in the contact controller when this button is pressed, this is to add a new contact -->
 <a asp-controller="Contact" asp-action="Add">Add Contact</a>
+<!-- create a table to display the contact data from the list of Contact objects imported above -->
 <table class="table table-bordered table-striped">
     <thead>
     <tr>
@@ -18,9 +21,17 @@
     </tr>
     </thead>
     <tbody>
+    <!-- 
+    create the table rows with the data from the Contact list
+    since this is a foreach loop, it will work with any size list greater than zero
+    -->
     @foreach (var contact in Model)
     {
         <tr>
+            <!-- 
+            call the Details route in the contact controller if the first or last name is clicked 
+            this page shows all the details available for that contact
+            -->
             <td><a asp-controller="Contact" asp-action="Details" asp-route-id="@contact.ContactID">@contact.FirstName</a></td>
             <td><a asp-controller="Contact" asp-action="Details" asp-route-id="@contact.ContactID">@contact.LastName</a></td>
             <td>@contact.Phonenumber</td>

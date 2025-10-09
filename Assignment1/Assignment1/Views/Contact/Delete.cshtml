@@ -1,5 +1,6 @@
-﻿@model Assignment1.Models.Contact
-
+﻿<!-- import the Contact model to allow modifying the database information -->
+@model Assignment1.Models.Contact
+<!-- set the title in the ViewBag to delete contact page for proper tab naming -->
 @{
     ViewData["Title"] = "Delete Contact";
 }
@@ -7,13 +8,20 @@
 <div class="text-center">
     <h1 class="display-4 bg-dark text-white">Contact Manager</h1>
 </div>
-
+<!-- show a message with the contact first and last name to make sure the right contact has been selected -->
 <div class="mt-5">
     <h2>Delete Contact</h2>
     <p>Do you really want to delete <strong>@Model.FirstName @Model.LastName</strong>?</p>
 </div>
-
+<!-- 
+create a form to get the user selection, where the first option (yes) calls the DeleteConfirmed route in the contact
+controller with the contacts ID to remove it from the database
+-->
 <form asp-action="DeleteConfirmed" asp-route-id="@Model.ContactID" method="post">
     <button type="submit" class="btn btn-danger me-2">Yes</button>
+    <!--
+    the second option (no) will not remove the contact from the database but instead will call the Details route in
+    the contact controller along with the ID of the contact to return the user the details page for that contact
+    -->
     <a asp-action="Details" asp-route-id="@Model.ContactID" class="btn btn-secondary">No</a>
 </form>

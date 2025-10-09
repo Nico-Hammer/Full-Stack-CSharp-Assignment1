@@ -1,5 +1,6 @@
-﻿@model Assignment1.Models.Contact
-
+﻿<!-- import the Contact model to allow accessing the database information -->
+@model Assignment1.Models.Contact
+<!-- set the title in the ViewBag to contact details page for proper tab naming -->
 @{
     ViewData["Title"] = "Contact Details";
 }
@@ -7,9 +8,9 @@
 <div class="text-center">
     <h1 class="display-4 bg-dark text-white">Contact Manager</h1>
 </div>
-
 <div class="mt-5">
     <h2>Contact Details</h2>
+    <!-- create the table which displays the contact information accessed via the Contact model imported above -->
     <table class="table table-bordered mt-3">
         <tr>
             <th style="width: 200px;">Name:</th>
@@ -37,8 +38,11 @@
         </tr>
         <tr>
             <td colspan="2" class="button-container">
+                <!-- create a button that calls the Edit route in the contact controller with the contact ID -->
                 <a asp-action="Edit" asp-route-id="@Model.ContactID" class="btn btn-dark me-2">Edit</a>
+                <!-- create a button that calls the Delete route in the contact controller with the contact ID -->
                 <a asp-action="Delete" asp-route-id="@Model.ContactID" class="btn btn-dark me-2">Delete</a>
+                <!-- create a button that calls the index route of the home controller which returns the user the home page -->
                 <a asp-controller="Home" asp-action="Index" class="btn btn-dark">Home</a>
             </td>
         </tr>

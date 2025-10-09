@@ -1,4 +1,6 @@
-﻿@model Assignment1.Models.Contact
+﻿<!-- import the Contact model to allow modifying the database information -->
+@model Assignment1.Models.Contact
+<!-- set the title in the ViewBag to add contact page for proper tab naming -->
 @{
     ViewData["Title"] = "Add Contact";
 }
@@ -6,45 +8,45 @@
 <div class="text-center">
     <h1 class="display-4 bg-dark text-white py-2">Contact Manager</h1>
 </div>
-
 <div class="mt-5">
     <h2>Add Contact</h2>
-
+    <!-- 
+    create a form to get the contact information from the user
+    using the HTTP post method to send the data to the database
+    -->
     <form asp-action="Add" method="post" class="mt-4">
+        <!-- only allow the form to be submitted when all fields are valid -->
         <div asp-validation-summary="All" class="text-danger mb-3"></div>
-
         <div class="mb-3">
             <label asp-for="FirstName" class="form-label">First name</label>
-            <input asp-for="FirstName" class="form-control" />
+            <input asp-for="FirstName" class="form-control"/>
         </div>
-
         <div class="mb-3">
             <label asp-for="LastName" class="form-label">Last name</label>
-            <input asp-for="LastName" class="form-control" />
+            <input asp-for="LastName" class="form-control"/>
         </div>
-
         <div class="mb-3">
             <label asp-for="Phonenumber" class="form-label">Phone</label>
-            <input asp-for="Phonenumber" class="form-control" />
+            <input asp-for="Phonenumber" class="form-control"/>
         </div>
-
         <div class="mb-3">
             <label asp-for="Email" class="form-label">Email</label>
-            <input asp-for="Email" class="form-control" />
+            <input asp-for="Email" class="form-control"/>
         </div>
-
+        <!-- 
+        create a dropdown menu for the relationship category, using the CategoryID as the way to identify which is chosen
+        and the CategoryName to show the readable name to the user
+        -->
         <div class="mb-3">
             <label asp-for="CategoryID" class="form-label">Category</label>
             <select asp-for="CategoryID" asp-items="@(new SelectList(ViewBag.Categories, "CategoryID", "CategoryName"))" class="form-select">
                 <option value="">Select category</option>
             </select>
         </div>
-
         <div class="mb-3">
             <label asp-for="Organization" class="form-label">Organization</label>
-            <input asp-for="Organization" class="form-control" />
+            <input asp-for="Organization" class="form-control"/>
         </div>
-
         <button type="submit" class="btn btn-dark me-2">Add</button>
         <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
     </form>

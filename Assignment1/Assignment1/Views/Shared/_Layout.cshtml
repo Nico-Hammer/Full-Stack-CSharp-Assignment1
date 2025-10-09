@@ -3,8 +3,10 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- set the tab title to the title available in the ViewBag for any given page -->
     <title>@ViewData["Title"]</title>
     <script type="importmap"></script>
+    <!-- import bootstrap and local stylesheets -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/Assignment1.styles.css" asp-append-version="true"/>
@@ -12,12 +14,15 @@
 <body>
 <div class="container">
     <main role="main" class="pb-3">
+        <!-- render the html specified in the given view -->
         @RenderBody()
     </main>
 </div>
+<!-- import jquery and other javascript functionality -->
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+<!-- await here to only run scripts if they exist and return valid data from the server side -->
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

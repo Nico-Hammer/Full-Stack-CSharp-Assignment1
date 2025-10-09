@@ -1,16 +1,23 @@
+/* import the models from the models namespace
+   import the EFCore library for database functionalities
+*/
 using Assignment1.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); // Add services to the container.
 
-// Register DbContext with the connection string from appsettings.json
+/// <summary>
+/// Register DbContext with the connection string from appsettings.json
+/// </summary>
 builder.Services.AddDbContext<ContactContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ContactContext")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ContactContext"))
+    );
 
-// Configure routing (if needed)
+/// <summary>
+/// Configure routing options
+/// </summary>
 builder.Services.AddRouting(options =>
 {
     options.LowercaseUrls = true;
@@ -19,24 +26,22 @@ builder.Services.AddRouting(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+/// <summary>
+/// Configure the HTTP request pipeline.
+/// </summary>
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-app.UseHttpsRedirection();
-app.UseRouting();
-
+app.UseHttpsRedirection(); // Make sure https instead of http is used
+app.UseRouting(); // Allow routing to be used
 app.UseAuthorization();
-
-app.MapStaticAssets();
-
+app.MapStaticAssets(); // Allow static objects (css files,html files, images, etc.) to be used
+// Set the default route to the index page of the home controller
 app.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}")
+        pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}") // include id and slug in the url if they exist
     .WithStaticAssets();
-
 app.Run();
