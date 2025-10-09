@@ -1,4 +1,5 @@
-﻿@model Assignment1.Models.Contact;
+﻿@model Assignment1.Models.Contact
+
 @{
     ViewData["Title"] = "Delete Contact";
 }
@@ -7,7 +8,13 @@
     <h1 class="display-4 bg-dark text-white">Contact Manager</h1>
 </div>
 
-<p1>Delete Contact</p1>
+<div class="mt-5">
+    <h2>Delete Contact</h2>
+    <p>Do you really want to delete <strong>@Model.FirstName @Model.LastName</strong>?</p>
+</div>
 
-<a>Do you really want to delete</a>
-
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.ContactID" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger me-2">Yes</button>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">No</a>
+</form>

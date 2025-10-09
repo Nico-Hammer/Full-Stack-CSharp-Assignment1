@@ -1,8 +1,51 @@
-﻿@model Assignment1.Models.Contact;
+﻿@model Assignment1.Models.Contact
 @{
     ViewData["Title"] = "Add Contact";
 }
 
 <div class="text-center">
-    <h1 class="display-4 bg-dark text-white">Contact Manager</h1>
+    <h1 class="display-4 bg-dark text-white py-2">Contact Manager</h1>
+</div>
+
+<div class="mt-5">
+    <h2>Add Contact</h2>
+
+    <form asp-action="Edit" method="post" class="mt-4">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="FirstName" class="form-label">First name</label>
+            <input asp-for="FirstName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="LastName" class="form-label">Last name</label>
+            <input asp-for="LastName" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Phonenumber" class="form-label">Phone</label>
+            <input asp-for="Phonenumber" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryID" class="form-label">Category</label>
+            <select asp-for="CategoryID" asp-items="@(new SelectList(ViewBag.Categories, "CategoryID", "CategoryName"))" class="form-select">
+                <option value="">Select category</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Organization" class="form-label">Organization</label>
+            <input asp-for="Organization" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-dark me-2">Add</button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </form>
 </div>

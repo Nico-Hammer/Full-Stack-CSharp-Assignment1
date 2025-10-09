@@ -1,5 +1,7 @@
 ﻿using Assignment1.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+
 namespace Contacts.Controllers
 {
     public class ContactController : Controller
@@ -14,64 +16,83 @@ namespace Contacts.Controllers
         [HttpGet]
         public IActionResult Details(int id)
         {
-            ViewBag.Action = "Details";
-            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
             var contact = context.Contacts.Find(id);
+            if (contact == null)
+                return NotFound();
+
+            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
             return View(contact);
         }
 
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.Action = "Add";
             ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
-            return View("Edit", new Contact());
+            return View(new Contact());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Add(Contact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                contact.CreatedDateTime = DateTime.Now.ToString("MM/dd/yyyy 'at'  hh:mm:ss");
+                context.Contacts.Add(contact);
+                context.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
+            return View(contact);
         }
 
         [HttpGet]
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            ViewBag.Action = "Edit";
-            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
             var contact = context.Contacts.Find(id);
+            if (contact == null)
+                return NotFound();
+
+            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
             return View(contact);
         }
-        
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Contact contact)
         {
             if (ModelState.IsValid)
             {
-                if (contact.ContactID == 0)
-                {
-                    context.Contacts.Add(contact);
-                }
-                else
-                {
-                    context.Contacts.Update(contact);
-                }
+                context.Contacts.Update(contact);
                 context.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Details", new { id = contact.ContactID });
             }
-            else
-            {
-                ViewBag.Action = (contact.ContactID == 0) ? "Add" : "Edit";
-                ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
-                return View(contact);
-            }
+
+            ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
+            return View(contact);
         }
 
         [HttpGet]
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int id)
         {
             var contact = context.Contacts.Find(id);
+            if (contact == null)
+                return NotFound();
+
             return View(contact);
         }
-        
-        public IActionResult Delete(Contact contact)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
         {
-            context.Contacts.Remove(contact);
-            context.SaveChanges();
+            var contact = context.Contacts.Find(id);
+            if (contact != null)
+            {
+                context.Contacts.Remove(contact);
+                context.SaveChanges();
+            }
             return RedirectToAction("Index", "Home");
         }
     }
