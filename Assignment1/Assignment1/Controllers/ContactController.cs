@@ -32,7 +32,6 @@ namespace Contacts.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Add(Contact contact)
         {
             if (ModelState.IsValid)
@@ -59,7 +58,6 @@ namespace Contacts.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Edit(Contact contact)
         {
             if (ModelState.IsValid)
@@ -84,7 +82,6 @@ namespace Contacts.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             var contact = context.Contacts.Find(id);

@@ -14,7 +14,6 @@
 </div>
 
 <form asp-action="DeleteConfirmed" asp-route-id="@Model.ContactID" method="post">
-    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-danger me-2">Yes</button>
-    <a asp-action="Index" asp-controller="Home" class="btn btn-secondary">No</a>
+    <a asp-action="Details" asp-route-id="@Model.ContactID" class="btn btn-secondary">No</a>
 </form>
