@@ -1,37 +1,56 @@
-﻿using Microsoft.Identity.Client;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Assignment1.Models
 {
     public class Contact
     {
-        
         public int ContactID { get; set; }
-        
+
         [Required(ErrorMessage = "First name is required")]
         public string FirstName { get; set; }
-        
+
         [Required(ErrorMessage = "Last name is required")]
         public string LastName { get; set; }
-        
+
+        private string phonenumber;
+
         [Required(ErrorMessage = "Phone number is required")]
-        [Phone(ErrorMessage="Please provide a valid phone number")]
-        public string Phonenumber { get; set; }
-        
+        [Phone(ErrorMessage = "Please provide a valid phone number")]
+        public string Phonenumber
+        {
+            get => phonenumber;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    var digits = new string(value.Where(char.IsDigit).ToArray());
+
+                    if (digits.Length == 10)
+                        phonenumber = $"({digits.Substring(0, 3)})-{digits.Substring(3, 3)}-{digits.Substring(6, 4)}";
+                    else
+                        phonenumber = value;
+                }
+                else
+                {
+                    phonenumber = value;
+                }
+            }
+        }
+
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Please provide a valid email address")]
         public string Email { get; set; }
-        
+
         [Required(ErrorMessage = "Category is required")]
         [Range(1, 3, ErrorMessage = "Please select a category")]
         public int? CategoryID { get; set; }
-        
+
         [ValidateNever]
         public Category CategoryName { get; set; }
 
         public string? Organization { get; set; }
-        
+
         public string CreatedDateTime { get; set; } = DateTime.Now.ToString("MM/dd/yyyy 'at' h:mm tt");
 
         public string Slug => FirstName?.Replace(' ', '-').ToLower() + '-' + LastName?.ToLower();

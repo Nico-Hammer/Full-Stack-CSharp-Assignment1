@@ -34,9 +34,19 @@ namespace Contacts.Controllers
         [HttpPost]
         public IActionResult Add(Contact contact)
         {
+            // Validates and formats the phone number
+            if (!string.IsNullOrEmpty(contact.Phonenumber))
+            {
+                var digits = new string(contact.Phonenumber.Where(char.IsDigit).ToArray());
+                if (digits.Length == 10)
+                    contact.Phonenumber = $"{digits.Substring(0, 3)}-{digits.Substring(3, 3)}-{digits.Substring(6, 4)}";
+                else
+                    ModelState.AddModelError("Phonenumber", "Phone number must be 10 digits.");
+            }
+
             if (ModelState.IsValid)
             {
-                contact.CreatedDateTime = DateTime.Now.ToString("MM/dd/yyyy 'at'  hh:mm:ss");
+                contact.CreatedDateTime = DateTime.Now.ToString("MM/dd/yyyy 'at' hh:mm tt");
                 context.Contacts.Add(contact);
                 context.SaveChanges();
                 return RedirectToAction("Index", "Home");
@@ -60,6 +70,16 @@ namespace Contacts.Controllers
         [HttpPost]
         public IActionResult Edit(Contact contact)
         {
+            // Validates and formats the phone number
+            if (!string.IsNullOrEmpty(contact.Phonenumber))
+            {
+                var digits = new string(contact.Phonenumber.Where(char.IsDigit).ToArray());
+                if (digits.Length == 10)
+                    contact.Phonenumber = $"{digits.Substring(0, 3)}-{digits.Substring(3, 3)}-{digits.Substring(6, 4)}";
+                else
+                    ModelState.AddModelError("Phonenumber", "Phone number must be 10 digits.");
+            }
+
             if (ModelState.IsValid)
             {
                 context.Contacts.Update(contact);
