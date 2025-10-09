@@ -6,3 +6,35 @@
 <div class="text-center">
     <h1 class="display-4 bg-dark text-white">Contact Manager</h1>
 </div>
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="FirstName">First name</label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName">Last name</label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Phonenumber">Phone number</label>
+        <input asp-for="Phonenumber" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email address</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CategoryID">Relationship category</label>
+        <select asp-for="CategoryID" class="form-control">
+            <option value="">select a relationship category</option>
+            @foreach (Category category in ViewBag.Categories)
+            {
+                <option value="@category.CategoryID">@category.CategoryName</option>
+            }
+        </select>
+    </div>
+    <input type="hidden" asp-for="ContactID" />
+    <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Cancel</a>
+</form>
