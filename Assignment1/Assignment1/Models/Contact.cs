@@ -32,7 +32,7 @@ namespace Assignment1.Models
 
         public string? Organization { get; set; }
         
-        public string CreatedDateTime { get; set; } = DateTime.Now.ToString("MM/dd/yyyy 'at'  hh:mm:ss");
+        public string CreatedDateTime { get; set; } = DateTime.Now.ToString("MM/dd/yyyy 'at' h:mm tt");
 
         public string Slug => FirstName?.Replace(' ', '-').ToLower() + '-' + LastName?.ToLower();
     }
